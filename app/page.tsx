@@ -1,19 +1,32 @@
-import { Button } from "@/components/ui/button"
+import { ChatTextarea } from "@/components/layout/chat-textarea"
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+  EmptyContent,
+} from "@/components/ui/empty"
+import { MessageCircle } from "lucide-react"
 
-export default function Page() {
+export default function Page () {
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
-      </div>
+    <div className="flex h-full w-full items-center justify-center p-4">
+      <Empty className="w-full max-w-2xl">
+        <EmptyHeader className="max-w-full!">
+          <EmptyMedia className="bg-muted text-muted-foreground flex h-14 w-14 items-center justify-center rounded-full">
+            <MessageCircle className="h-6 w-6" />
+          </EmptyMedia>
+          <EmptyTitle className="text-xl font-semibold">Start a new conversation</EmptyTitle>
+          <EmptyDescription>
+            Type a message below to begin chatting with your AI assistant.
+          </EmptyDescription>
+        </EmptyHeader>
+        
+        <EmptyContent className="w-full max-w-full! mt-4">
+          <ChatTextarea />
+        </EmptyContent>
+      </Empty>
     </div>
   )
 }

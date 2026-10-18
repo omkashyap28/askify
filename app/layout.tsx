@@ -1,10 +1,15 @@
-import { Geist, Geist_Mono, Inter } from "next/font/google"
+import { Geist_Mono, Inter } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
+import { TooltipProvider } from "@/components/ui/tooltip"
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
+import { ChatSidebar } from "@/components/layout/sidebar"
+import { ContextProvider } from "@/context/ai-context"
+import { Header } from "@/components/layout/header"
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'})
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
 const fontMono = Geist_Mono({
   subsets: ["latin"],
@@ -20,10 +25,28 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", inter.variable)}
+      className={cn(
+        "antialiased",
+        fontMono.variable,
+        "font-sans",
+        inter.variable
+      )}
     >
-      <body>
-        <ThemeProvider>{children}</ThemeProvider>
+      <body cz-shortcut-listen="true">
+        <ThemeProvider>
+          <TooltipProvider>
+            <ContextProvider>
+              <SidebarProvider>
+                <ChatSidebar />
+                <SidebarInset>
+                  <main className="mx-auto h-screen w-full max-w-3xl p-8 sm:p-4">
+                    {children}
+                  </main>
+                </SidebarInset>
+              </SidebarProvider>
+            </ContextProvider>
+          </TooltipProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
