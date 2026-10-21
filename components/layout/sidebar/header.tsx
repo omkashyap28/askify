@@ -25,7 +25,7 @@ export const Header = () => {
                 className="hover:bg-transparent active:bg-transparent"
                 render={<Link href="/" />}
               >
-                Logo
+                Askify
               </SidebarMenuButton>
               <SidebarTrigger size="icon" />
             </>

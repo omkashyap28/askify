@@ -1,13 +1,9 @@
 import { Geist_Mono, Inter } from "next/font/google"
 
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils"
-import { TooltipProvider } from "@/components/ui/tooltip"
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
-import { ChatSidebar } from "@/components/layout/sidebar"
-import { ContextProvider } from "@/context/ai-context"
-import { Header } from "@/components/layout/header"
+import { cn } from "cn"
+import { Toaster } from "@/components/ui/toast"
+import { Provider } from "@/providers"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -33,20 +29,12 @@ export default function RootLayout({
       )}
     >
       <body cz-shortcut-listen="true">
-        <ThemeProvider>
-          <TooltipProvider>
-            <ContextProvider>
-              <SidebarProvider>
-                <ChatSidebar />
-                <SidebarInset>
-                  <main className="mx-auto h-screen w-full max-w-3xl p-8 sm:p-4">
-                    {children}
-                  </main>
-                </SidebarInset>
-              </SidebarProvider>
-            </ContextProvider>
-          </TooltipProvider>
-        </ThemeProvider>
+        <Provider>
+          <main className="@container mx-auto h-full w-full max-w-4xl">
+            {children}
+          </main>
+          <Toaster />
+        </Provider>
       </body>
     </html>
   )
